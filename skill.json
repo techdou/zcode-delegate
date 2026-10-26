@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "name": "zcode-delegate",
+  "version": "0.2.0",
+  "provider_cli": "zcode",
+  "repository": "https://github.com/techdou/zcode-delegate",
+  "license": "MIT",
+  "compatibility": {
+    "min_cli": null,
+    "tested_through_cli": "0.17.0",
+    "policy": "capability-first; entry auto-discovery (flag > env > per-platform desktop install candidates > PATH); re-verify with --doctor after ZCode Desktop updates",
+    "required_features": [
+      "headless -p prompt execution",
+      "--json output with sessionId + usage (cacheReadTokens)",
+      "--mode build/edit/plan/yolo/guarded",
+      "--resume <sess_...>",
+      "--attach <path>",
+      "--cwd <path>"
+    ],
+    "note": "The CLI ships inside ZCode Desktop (resources/glm/zcode.cjs); no standalone distribution channel as of 2026-10-26."
+  },
+  "updates": {
+    "default_channel": "none",
+    "automatic_network_checks": false,
+    "note": "manual maintenance only in v0.1; no self-update mechanism"
+  }
+}

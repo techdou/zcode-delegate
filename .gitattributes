@@ -1,0 +1,4 @@
+# bash launcher must keep LF (CRLF breaks shebang/commands on POSIX)
+launchers/zcode text eol=lf
+# windows launcher keeps CRLF
+*.cmd text eol=crlf

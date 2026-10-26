@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# zcode CLI launcher (Git Bash / MSYS) - auto-discovers the ZCode Desktop bundled CLI.
+# The ZCode CLI has no standalone distribution; it ships inside the desktop app at
+# resources/glm/zcode.cjs. Precedence: ZCODE_CLI_ENTRY > known install locations.
+set -u
+
+entry="${ZCODE_CLI_ENTRY:-}"
+if [[ -z "$entry" ]]; then
+  for c in \
+    "$LOCALAPPDATA/Programs/ZCode/resources/glm/zcode.cjs" \
+    "C:/Program Files/ZCode/resources/glm/zcode.cjs" \
+    "E:/ZCode/resources/glm/zcode.cjs" \
+    "/Applications/ZCode.app/Contents/Resources/glm/zcode.cjs" \
+    "/opt/ZCode/resources/glm/zcode.cjs" \
+    "$HOME/ZCode/resources/glm/zcode.cjs"; do
+    [[ -n "$c" && -f "$c" ]] && entry="$c" && break
+  done
+fi
+
+if [[ -n "$entry" && -f "$entry" ]]; then
+  exec node "$entry" "$@"
+fi
+
+echo "zcode: CLI entry not found. Set ZCODE_CLI_ENTRY to <ZCodeDesktop>/resources/glm/zcode.cjs" >&2
+exit 1
